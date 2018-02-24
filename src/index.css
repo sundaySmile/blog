@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+html {
+  font-size: calc((100vw / 2560) * 100);
+}
+
+html, body, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
