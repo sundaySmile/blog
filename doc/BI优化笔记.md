@@ -18,7 +18,7 @@ Vue.component(select.name, select);
 ### 结果
 > 以下的数据只是单个截图，事实上输出的结果数据应该是统计后的平均数字，不如，搜集100组（或其他组数，一般大数据集得出的结果更接近真实）数据，然后去平均值。 
 
-页面优化前download用时  
+页面优化前download用时  
 ![](../assets/2018-3-11/old-domcontentloaded.jpg)
 
 页面优化后ddownload用时  
