@@ -29,3 +29,5 @@ VueJS 采用数据劫持结合发布者-订阅者模式的方式， 通过 ES5 �
 3、 实现一个Watcher，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图
 
 4、mvvm入口函数，整合以上三者
+
+代码解析 `defineReactive`, `Dep`, `Complile`
