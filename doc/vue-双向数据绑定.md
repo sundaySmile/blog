@@ -1,6 +1,5 @@
-/**
-  *  <p style="display: none"> https://mp.weixin.qq.com/s?__biz=MzI3NTM1MjExMg==&mid=2247483789&idx=1&sn=e7297ec3443007015117637709f27521&mpshare=1&scene=23&srcid=0328EjthuLDIP7TzNSqJB0kJ#rd </p>
-*/
+ <p style="display: none">https://mp.weixin.qq.com/s?__biz=MzI3NTM1MjExMg==&mid=2247483789&idx=1&sn=e7297ec3443007015117637709f27521&mpshare=1&scene=23&srcid=0328EjthuLDIP7TzNSqJB0kJ#rd </p>
+
 
 ###### 双向数据绑定关系的识别过程
 通过在HTML元素中添加指令（v-model）的方式，将视图元素和数据的绑定关系进行声明
