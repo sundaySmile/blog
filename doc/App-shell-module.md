@@ -11,7 +11,7 @@ App Shell 架构具有相对不变的导航以及一直变化的内容，对应�
 
 
 构建 Google I/O 2016 Progressive Web App
- https://developers.google.com/web/showcase/2016/iowa2016
+ https://developers.google.com/web/showcase/2016/iowa2016  
  构建 PWA教程 https://codelabs.developers.google.com/codelabs/your-first-pwapp/#0
  
  PWA 构建的示例
