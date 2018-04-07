@@ -9,11 +9,14 @@ App“shell”是支持用户界面所需的最小的 HTML、CSS 和 JavaScript�
 它是UI的主干以及让应用成功起步的所需要的核心组件。
 App Shell 架构具有相对不变的导航以及一直变化的内容，对应于和网站意义重大。
 
+
 构建 Google I/O 2016 Progressive Web App
  https://developers.google.com/web/showcase/2016/iowa2016
+ 构建 PWA教程 https://codelabs.developers.google.com/codelabs/your-first-pwapp/#0
  
  PWA 构建的示例
   - 离线维基百科 https://wiki-offline.jakearchibald.com/wiki/Rick_and_Morty
+
 
 App Shell可以执行以下操作：
 - 快速加载
@@ -22,6 +25,7 @@ App Shell可以执行以下操作：
 - 将内容与导航分离开来
 - 检索和显示特定页面的内容（HTML、JSON 等）
 - 可选：缓存动态内容
+
 
 缓存 App Shell  
 
