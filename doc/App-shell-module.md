@@ -10,6 +10,11 @@ App“shell”是支持用户界面所需的最小的 HTML、CSS 和 JavaScript�
 App Shell 架构具有相对不变的导航以及一直变化的内容，对应于和网站意义重大。
 
 
+#### 为什么使用 App Shell
+
+因为它允许你集中于速度，并且给予 PWA和 原生应用类似的属性：及时加载和常规更新
+
+
 构建 Google I/O 2016 Progressive Web App
  https://developers.google.com/web/showcase/2016/iowa2016  
  构建 PWA教程 https://codelabs.developers.google.com/codelabs/your-first-pwapp/#0
