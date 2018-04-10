@@ -113,6 +113,7 @@ const fancyButtonRef = React.createRef();
   ```
   
   - `getSnapshotBeforeUpdate` ， 变动发生前调用。  
+  
     ```
     class Example extends React.Component {
       getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -120,3 +121,29 @@ const fancyButtonRef = React.createRef();
       }
     }
     ```
+    
+ 对React16.3之前版本的支持  
+
+```
+ # Yarn
+  yarn add react-lifecycles-compat
+
+  # NPM
+  npm install react-lifecycles-compat --save
+  
+  # 使用方法
+  import React from 'react';
+  import {polyfill} from 'react-lifecycles-compat';
+
+  class ExampleComponent extends React.Component {
+    static getDerivedStateFromProps(nextProps, prevState) {
+      // Your state update logic here ...
+    }
+  }
+
+  // Polyfill your component to work with older versions of React:
+  polyfill(ExampleComponent);
+
+  export default ExampleComponent;
+  
+ ```
