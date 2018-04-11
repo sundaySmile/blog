@@ -176,13 +176,18 @@ self.addEventListener('fetch', function(event) {
 `event.waitUntill`告诉浏览器在promise没有返回前它要在浏览器中一直进行。
 
 `caches` 缓存框包含来自任何安全来源的请求响应对
+
 - cache.put() 添加缓存条且传入请求URL以及响应。
+
 - cahce.addAll([]) 获取它们 并将请求响应放在缓存中.
+
 - cache.match(URL) 从缓存中获取内容，如果找到了，则返回匹配项的Promise.
+
 - cache.delete.
+
 - cache.open()
  
- ServiceWorkerGlobalScope self 注册监听的事件(sw.js)   
+ ServiceWorkerGlobalScope self 注册监听的事件(sw.js)
  - install
  - activate
  - fetch
@@ -254,7 +259,7 @@ self.addEventListener('fetch', function(event) {
  
  ServiceWorkerRegistration 的方法  
  - update
-  > 更新 service worker
+ > 更新 service worker
  - unregister
  > 取消service worker注册
  - showNotification
