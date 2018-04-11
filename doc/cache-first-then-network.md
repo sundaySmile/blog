@@ -180,7 +180,7 @@ self.addEventListener('fetch', function(event) {
   - cache.delete
   - cache.open()
  
- navigator.serviceWorker self 注册监听的事件(sw.js)   
+ ServiceWorkerGlobalScope self 注册监听的事件(sw.js)   
  - install
  - activate
  - fetch
@@ -190,22 +190,32 @@ self.addEventListener('fetch', function(event) {
     // do something
  })
  ```
- navigator.serviceWorker self 方法(sw.js)  
+ ServiceWorkerGlobalScope self 方法(sw.js)  
  - skipWaiting
+ - fetch
  
  ```
  self.skipWaiting()
  ```
  
-  navigator.serviceWorker 注册监听的事件  
+  ServiceWorkerGlobalScope self 属性(sw.js)  
+ - clients
+ - registration
+ - caches
+ 
+ ```
+ self.skipWaiting()
+ ```
+  navigator.serviceWorker（ServiceWorkerContainer） 注册监听的事件  
  - controllerchange 
+ > 当 ServiceWokerRegister获取新的活动 worker时触发
  ```
  navigator.serviceWorker.addEventListener('controllerchange', function() {
   // do something
  })
  ```
  
- navigator.serviceWorker 的方法  
+ navigator.serviceWorker 的方法  
  - register // 注册sw.js 文件
  - 
  
@@ -225,7 +235,8 @@ self.addEventListener('fetch', function(event) {
  }
  ```
  ServiceWorkerRegistration 注册监听的事件   
- - updatefound    // 
+ - updatefound 
+ > 触发时机： 1、当 `statechange`被触发时； 2、 ServiceWorkerRegistration.installing属性获取新的service worker任何时候都会触发它
  ```
  ServiceWorkerRegistration.addEventListener('updatefound', function() {
   // do something
@@ -233,27 +244,39 @@ self.addEventListener('fetch', function(event) {
  ```
 
  ServiceWorkerRegistration 的属性  
+ - scope 
  - waiting
  - installing
  - installed
-
+ - active
+ 
+ ServiceWorkerRegistration 的方法  
+ - update 
+  > 更新 service worker
+ - unregister
+ > 取消service worker注册
+ - showNotification
+ 
 <b>ServiceWorkerRegistration.waiting、ServiceWorkerRegistration.installing等业务下文统称为 `worker`.</b>  
-worker 的方法
+worker（ServiceWorker） 的方法
 - postMessage(values)
 ```
 worker.postMessage({ action: 'skipWaiting' })
 ```
 worke 的注册监听事件  
- - statechange    // 
+ - statechange    
+ > ServiceWorker.state改变时触发
  ```
  worker.addEventListener('statechange', function() {
     // do something
  })
  ```
-worker 的属性  
- - waiting
+worker.state 的值  
  - installing
  - installed
+ - activating
+ - activated
+ - redundant
  
-
+### IndexedDB and Caching
 
