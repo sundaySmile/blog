@@ -15,10 +15,15 @@ https://jakearchibald.com/2014/offline-cookbook/#cache-network-race
 `event.waitUntill`告诉浏览器在promise没有返回前它要在浏览器中一直进行。    
 `caches` 缓存框包含来自任何安全来源的请求响应对。    
 
-  + cache.put() 添加缓存条且传入请求URL以及响应。
-  - cahce.addAll([]) 获取它们 并将请求响应放在缓存中。
-  - cache.match(URL) 从缓存中获取内容，如果找到了，则返回匹配项的Promise.
-  - cache.delete  
+- cache.put() 添加缓存条且传入请求URL以及响应。
+
+- cahce.addAll([]) 获取它们 并将请求响应放在缓存中.
+
+- cache.match(URL) 从缓存中获取内容，如果找到了，则返回匹配项的Promise.
+
+- cache.delete.
+
+- cache.open()
 
 ```
 self.addEventListener('install', function(event) {
@@ -286,4 +291,6 @@ worker.state 的值  
  - redundant
  
 ### IndexedDB and Caching
+---
+
 
