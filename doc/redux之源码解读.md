@@ -3,9 +3,9 @@
 * --- git: https://github.com/reactjs/redux/
 ----
 
-redux库读取文件顺序  
+#### redux库读取文件顺序  
 
-* src/index.js, 根据文件中函数查找其源头
+1、 src/index.js, 根据文件中函数查找其源头
 ```
 import createStore from './createStore'
 import combineReducers from './combineReducers'
@@ -15,15 +15,15 @@ import compose from './compose'
 import warning from './utils/warning'
 import __DO_NOT_USE__ActionTypes from './utils/actionTypes'
 ```
-* src/createStore.js, src/index.js 首位import文件
+2、 src/createStore.js, src/index.js 首位import文件  
+3、 src/combineReducers  
+4、 src/bindActionCreators.js  
+5、 src/applyMiddleware  
 
-src/index.js  
+#### src/index.js  
 > 向用户抛出可用接口  
 
 ```
-/**
-* 
-*/
 export {
   createStore,  // 创建一个store对象
   combineReducers,  // 把多个reduce合并为一个
@@ -34,7 +34,7 @@ export {
 }
 ```
 
-src/createStore.js  
+#### src/createStore.js  
 > 
 ```
 /**
@@ -291,10 +291,149 @@ export default function createStore(reducer, preloadedState, enhancer) {
 ```
 
 
-src/combineReducer.js  
+#### src/combineReducer.js  
 > 把多个reducer 合并为一个。但是，使用它在createStore（）初始化前，会执行 function assertReducerShape(reducers)，
 > 从而使 action{ type: ActionTypes.INIT } and { ActionTypes.PROBE_UNKNOWN_ACTION } 在每个reducer中执行一次
 
 ```
+/**
+ * 它将调用每个子reducer，并将其结果收集到单个状态对象中{}，该对象的键与传递的reducer函数的键相对应.
+ *
+ * @param {Object} reducers An object whose values correspond to different
+ * reducer functions that need to be combined into one. One handy way to obtain
+ * it is to use ES6 `import * as reducers` syntax. The reducers may never return
+ * undefined for any action. Instead, they should return their initial state
+ * if the state passed to them was undefined, and the current state for any
+ * unrecognized action.
+ *
+ * @returns {Function} A reducer function that invokes every reducer inside the
+ * passed object, and builds a state object with the same shape.
+ */
+export default function combineReducers(reducers) {
+  const reducerKeys = Object.keys(reducers)
+  const finalReducers = {}
+  for (let i = 0; i < reducerKeys.length; i++) {
+    const key = reducerKeys[i]
 
+    if (process.env.NODE_ENV !== 'production') {
+      if (typeof reducers[key] === 'undefined') {
+        warning(`No reducer provided for key "${key}"`)
+      }
+    }
+
+    if (typeof reducers[key] === 'function') {
+      // 把reducers中的值以key为键对应到 finalReducers 对象中
+      finalReducers[key] = reducers[key]
+    }
+  }
+  const finalReducerKeys = Object.keys(finalReducers)
+
+  let unexpectedKeyCache
+  if (process.env.NODE_ENV !== 'production') {
+    unexpectedKeyCache = {}
+  }
+
+  let shapeAssertionError
+  try {
+    assertReducerShape(finalReducers)
+  } catch (e) {
+    shapeAssertionError = e
+  }
+
+  return function combination(state = {}, action) {
+    if (shapeAssertionError) {
+      throw shapeAssertionError
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      const warningMessage = getUnexpectedStateShapeWarningMessage(
+        state,
+        finalReducers,
+        action,
+        unexpectedKeyCache
+      )
+      if (warningMessage) {
+        warning(warningMessage)
+      }
+    }
+
+    let hasChanged = false
+    const nextState = {}
+    for (let i = 0; i < finalReducerKeys.length; i++) {
+      const key = finalReducerKeys[i]
+      const reducer = finalReducers[key]
+      const previousStateForKey = state[key]
+      const nextStateForKey = reducer(previousStateForKey, action)
+      if (typeof nextStateForKey === 'undefined') {
+        const errorMessage = getUndefinedStateErrorMessage(key, action)
+        throw new Error(errorMessage)
+      }
+      nextState[key] = nextStateForKey
+      hasChanged = hasChanged || nextStateForKey !== previousStateForKey
+    }
+    return hasChanged ? nextState : state
+  }
+}
+```
+
+#### src/applyMiddleware.js  
+> compose 
+
+```
+import compose from './compose'
+
+/**
+ * 创建一个`store`增强器，将中间件应用于`Redux store` 的 `dispatch` 方法。
+ * 这适用于各种任务，如表达、以简洁的方式进行的异步操作，或者记录每个动作有效载荷
+ * 
+ * See `redux-thunk` package as an example of the Redux middleware.
+ *
+ * 因为中间件可能是异步的，所以这应该是组合链中的第一个 `store` 增强器
+ *
+ * 请注意，每个中间件将被赋予`dispatch`和`getState`作为命名参数
+ *
+ * @param {...Function} middlewares The middleware chain to be applied.
+ * @returns {Function} A store enhancer applying the middleware.
+ */
+ 
+ /**
+ * 手工 thunk middleware
+ * @param {function} dispatch 
+ * @param {function} getState
+ */
+// const thunkMiddleware = function ({ dispatch, getState }) {
+// 	// console.log('Enter thunkMiddleware');
+// 	return function(next) {
+// 			// console.log('Function "next" provided:', next);
+// 			return function (action) {
+// 					// console.log('Handling action:', action);
+// 					return typeof action === 'function' ?
+// 							action(dispatch, getState) :
+// 							next(action)
+// 			}
+// 	}
+// }
+export default function applyMiddleware(...middlewares) {
+  return createStore => (...args) => {
+    const store = createStore(...args)
+    let dispatch = () => {
+      throw new Error(
+        `Dispatching while constructing your middleware is not allowed. ` +
+          `Other middleware would not be applied to this dispatch.`
+      )
+    }
+
+    const middlewareAPI = {
+      getState: store.getState,
+      dispatch: (...args) => dispatch(...args)
+    }
+    const chain = middlewares.map(middleware => middleware(middlewareAPI))
+    dispatch = compose(...chain)(store.dispatch)
+
+    return {
+      ...store,
+      dispatch
+    }
+  }
+}
 ```
