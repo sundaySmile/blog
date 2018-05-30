@@ -1,4 +1,4 @@
-注：redux与vuex类似，是工程内部状态管理工具, 可预测的JavaScript应用程序的状态容器x².
+注：redux与vuex类似，是工程内部状态管理工具, 可预测的JavaScript应用程序的状态容器.
 
 ### redux原则
 
