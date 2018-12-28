@@ -1,0 +1,29 @@
+//  向后兼容，现在不常用，未来可期待  
+
+
+### column
+column-count:  
+column-width:  
+column-gap:  
+官方onlie demo： https://jsfiddle.net/api/mdn/  
+```
+.grid_container {
+  column-width: 250px;
+  column-gap: 20px;
+}
+
+.grid_card {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  background-color: rgb(207, 232, 220);
+  border: 2px solid rgb(79, 185, 227);
+  padding: 10px;
+  margin: 0 0 1em 0;
+}
+```
+
+
+### 
+
+
+> css Fragement,一种css模式。它定义了在多个页面、区域或者列中当它的内容rui pian
