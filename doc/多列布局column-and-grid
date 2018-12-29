@@ -1,11 +1,10 @@
 //  向后兼容，现在不常用，未来可期待  
 
-
 ### column
-column-count:  
-column-width:  
-column-gap:  
-官方onlie demo： https://jsfiddle.net/api/mdn/  
++ column-count:  列数  
++ column-width:  列宽度  
++ column-gap: 列间隔  
+[官方onlie demo](https://jsfiddle.net/api/mdn/)  
 ```
 .grid_container {
   column-width: 250px;
@@ -23,7 +22,32 @@ column-gap:
 ```
 
 
-### 
+### [gird-*](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout)  
+functions  
++ repeat()  
++ minmax()
++ fit-content()  
 
 
-> css Fragement,一种css模式。它定义了在多个页面、区域或者列中当它的内容rui pian
+```
+display: grid;
+// 网格为3列
+grid-template-columns: repeat(3, 1fr);
+// 网格间距为10px
+gird-gap: 10px;
+// 网格行最小高度位100px，最大高度auto
+grid-auto-rows: minmax(100px, auto); 
+```
+
+——————————————
+#### [grid会取代flex？](https://css-tricks.com/css-grid-replace-flexbox/)   
+  - 它们可以负责不同业务角色，不互斥。grid可以做flex不能做的事，flex也可以完成grid不能执行的任务；它们可以分开做不（或相）同事件，也可以合作
+  - grid虽然比flex能做的事情更多，但它毕竟事新贵，浏览器的支持度不如flex高  
+
+#### 
+
+
+-----------
+###### css Fragement,一种css模式。它定义了在多个页面、区域或者列中当它的内容碎片化它将如何渲染  
+###### 布局性能（layout performance）
+
