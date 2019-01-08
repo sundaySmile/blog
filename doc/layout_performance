@@ -1,0 +1,11 @@
+#### GSS . 
+[GSS-introduction](https://www.sitepoint.com/introducing-gss-grid-style-sheets/)  
+GSS采用了Badros，Borning和Stuckey，1999的Cassowary线性算术约束求解算法的JavaScript端口（Cassowary.js）。该算法根据用户在自然语言中给出的输入约束找到布局的最优解决方案.
+
+
+```
+$ bower install gss
+```
+
+##### 约束编程 constraint programming
+Constraint programming focuses on intentions, not implementation
